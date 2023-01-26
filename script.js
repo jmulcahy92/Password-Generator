@@ -1,14 +1,23 @@
 //user clicks a button
   //event listener, calling a function to write password
+document.getElementById("generate").addEventListener("click", generatePassword);
+
   //inside our function we prompt for password length
-    //var passwordLength = prompt("How many characters would you like your password to contain?"); //what does prompt return??
-      //we need to validate the prompt so that it meets criteria, must be a number, gt 8 lt 129
+function generatePassword() {
+  var passwordLength = prompt("How many characters would you like your password to contain?"); //returns string
+      //we need to validate the prompt so that it meets criteria, must be a number, greater than 8 less than 129
     //then user is prompted password length 
 
-    //if(passwordLength < 8){
-      //alert('Password length must be at least 8 characters');
-    //}
-    
+    if(passwordLength < 8) {
+      alert('Password length must be at least 8 characters');
+      generatePassword();
+    } else if (passwordLength>128) {
+      alert('Password length must be no more than 128 characters');
+      generatePassword();
+    } else{
+      // continue
+    }
+  }
 //then user confirms for password criteria
   //var hasNumeric = confirm("Click OK to confirm including numeric characters.");
   //var hasLower = confirm("Click OK to confirm including Lower characters.");
