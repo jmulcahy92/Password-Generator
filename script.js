@@ -4,29 +4,37 @@ document.getElementById("generate").addEventListener("click", generatePassword);
 
   //inside our function we prompt for password length
 function generatePassword() {
-  var passwordLength = prompt("How many characters would you like your password to contain?"); //returns string
-      //we need to validate the prompt so that it meets criteria, must be a number, greater than 8 less than 129
-    //then user is prompted password length 
+  var passwordLength = prompt("How many characters would you like your password to contain?");
+  //we need to validate the prompt so that it meets criteria, must be a number, greater than 8 less than 129
 
-    if(passwordLength < 8) {
+    if (isNaN(passwordLength)) {
+      alert('Please input a number between 8 and 128')
+      generatePassword();
+    }
+    else if(passwordLength < 8) {
       alert('Password length must be at least 8 characters');
       generatePassword();
-    } else if (passwordLength>128) {
+    }
+    else if (passwordLength>128) {
       alert('Password length must be no more than 128 characters');
       generatePassword();
-    } else{
-      // continue
+    }
+    else{
+      //then user confirms for password criteria
+      var hasNumeric = confirm("Click OK to confirm including numeric characters.");
+      var hasLower = confirm("Click OK to confirm including Lower characters.");
+      var hasUpper = confirm("Click OK to confirm including Upper characters.");
+      var hasSpecial = confirm("Click OK to confirm including Special characters.");
+
+      if (!hasNumeric && !hasLower && !hasUpper && !hasSpecial) {
+        alert('Must select at least one character type');
+        generatePassword();
+      }
+      else {
+        
+      }
     }
   }
-//then user confirms for password criteria
-  //var hasNumeric = confirm("Click OK to confirm including numeric characters.");
-  //var hasLower = confirm("Click OK to confirm including Lower characters.");
-  //var hasUpper = confirm("Click OK to confirm including Upper characters.");
-  //var hasSpecial = confirm("Click OK to confirm including Special characters.");
-
-  //if(hasNumeric === false && hasLower === false && hasUpper === false && hasSpecial === false){
-      //alert('Must select at least one character type');
-  //}
 
   //object to store user input
   //var userPassword = {
