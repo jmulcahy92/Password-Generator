@@ -2,11 +2,15 @@
   //event listener, calling a function to write password
 document.getElementById("generate").addEventListener("click", generatePassword);
 
-  //inside our function we prompt for password length
+// arrays for each character type
+var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+var lowerCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var upperCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var specialCharacters = ['!', '#', '$', '%', '&', '*', '+', '(', ')', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~'];
+
 function generatePassword() {
   var passwordLength = prompt("How many characters would you like your password to contain?");
-  //we need to validate the prompt so that it meets criteria, must be a number, greater than 8 less than 129
-
+  //we need to validate the prompt so that it meets criteria: must be a number, greater than 8 less than 129
     if (isNaN(passwordLength)) {
       alert('Please input a number between 8 and 128')
       generatePassword();
@@ -15,7 +19,7 @@ function generatePassword() {
       alert('Password length must be at least 8 characters');
       generatePassword();
     }
-    else if (passwordLength>128) {
+    else if (passwordLength > 128) {
       alert('Password length must be no more than 128 characters');
       generatePassword();
     }
@@ -31,46 +35,35 @@ function generatePassword() {
         generatePassword();
       }
       else {
-        
+        // empty arrays declared inside function in case of repeated use
+        var possibleCharacters = [];
+        var result = [];
+
+        if (hasNumeric) {
+          possibleCharacters = possibleCharacters.concat(numericCharacters);
+        }
+
+        if (hasLower) {
+          possibleCharacters = possibleCharacters.concat(lowerCharacters);
+        }
+
+        if (hasUpper) {
+          possibleCharacters = possibleCharacters.concat(upperCharacters);
+        }
+
+        if (hasSpecial) {
+          possibleCharacters = possibleCharacters.concat(specialCharacters);
+        }
+
+        for (i = 0; i < passwordLength; i++) {
+          result[i] = possibleCharacters[Math.floor(possibleCharacters.length * Math.random())];
+        }
+
+        //the password is displayed to the screen
+        var password = result.join("");
+        var passwordText = document.querySelector("#password");
+
+        passwordText.value = password;
       }
     }
   }
-
-  //object to store user input
-  //var userPassword = {
-      //length: passwordLength,
-      //hasNumeric: hasNumeric,
-      //hasLower: hasLower,
-      //hasUpper: hasUpper,
-      //hasSpecial: hasSpecial,
-  //}
-  // return userPassword;
-
-  //create another function to generate the password
-  //var userOptions = getOptions();
-  //we have an array to store each criteria
-  //var possibleChars = [];
-  //var result = [];
-  //var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  //if(userOptions.hasNumeric === true){
-    //possibleChars = possibleChars.concat(numericCharacters);
-  //}
-  
-//the password is displayed to the screen
-
-
-
-// // Assignment Code
-// var generateBtn = document.querySelector("#generate");
-
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
