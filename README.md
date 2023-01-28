@@ -2,7 +2,7 @@
 
 ## Description
 
-Generates a random password of 8 to 128 characters, with options to include any combination of numeric, lowercase, uppercase, and special characters.
+Generates a random password of 8 to 128 characters, with option to include any combination of numeric, lowercase, uppercase, and special characters. (Accomplished with the aid of pseudo-code provided by the TA)
 
 ## Link
 
